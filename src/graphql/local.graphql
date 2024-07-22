@@ -1,0 +1,67 @@
+# Define Employee type
+type Employee {
+  id: ID!
+  name: String!
+  email: String!
+  position: String!
+  department: String
+}
+
+# Extend the Query type to include local employees
+extend type Query {
+  employees: [Employee] @client
+}
+
+# Extend the Mutation type to include local operations
+extend type Mutation {
+  createEmployee(employee: EmployeeInput!): Employee @client
+  updateEmployee(employee: EmployeeInput!): Employee @client
+  deleteEmployee(id: ID!): Boolean @client
+}
+
+# Input type for creating or updating an employee
+input EmployeeInput {
+  id: ID!
+  name: String!
+  email: String!
+  position: String!
+  department: String
+}
+
+# Query to fetch employees from the local cache
+query LocalEmployees {
+  employees @client {
+    id
+    name
+    email
+    position
+    department
+  }
+}
+
+# Mutation to create a new employee in the local cache
+mutation CreateEmployee($employee: EmployeeInput!) {
+  createEmployee(employee: $employee) @client {
+    id
+    name
+    email
+    position
+    department
+  }
+}
+
+# Mutation to update an existing employee in the local cache
+mutation UpdateEmployee($employee: EmployeeInput!) {
+  updateEmployee(employee: $employee) @client {
+    id
+    name
+    email
+    position
+    department
+  }
+}
+
+# Mutation to delete an employee from the local cache
+mutation DeleteEmployee($id: ID!) {
+  deleteEmployee(id: $id) @client
+}

@@ -1,0 +1,25 @@
+mutation CreatePost($input: CreatePostInput!) {
+  createPost(input: $input) {
+    id
+    title
+    body
+  }
+}
+
+mutation CreateAlbum($input: CreateAlbumInput!) {
+  createAlbum(input: $input) {
+    id
+    title
+  }
+}
+
+mutation CreateUser($input: CreateUserInput!) {
+  createUser(input: $input) {
+    id
+    name
+    email
+    username
+    phone
+    website
+  }
+}
